@@ -1,3 +1,12 @@
+body, #root, .App {
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cairo', Arial, sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -26,6 +35,12 @@
 
 .App-link {
   color: #61dafb;
+}
+
+@media (max-width: 600px) {
+  .App h1, .App h2 {
+    font-size: 1.1rem !important;
+  }
 }
 
 @keyframes App-logo-spin {
