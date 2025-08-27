@@ -55,8 +55,6 @@ function App() {
   const weightedSegments = getWeightedSegments(availableChoices);
   const segments = weightedSegments.map(s => s.label);
   const images = weightedSegments.map(s => s.image);
-  const quantities = weightedSegments.map(s => s.quantity);
-  const probabilities = weightedSegments.map(s => s.probability);
 
   // --- SPIN LOGIC ---
   const spinWheel = () => {
@@ -134,7 +132,7 @@ function App() {
       frame();
       if (audioRef.current) {
         audioRef.current.currentTime = 0;
-        audioRef.current.play();
+        audioRef.current.play().catch(() => {}); // Handle play promise rejection
         const stopTimeout = setTimeout(() => {
           if (audioRef.current) {
             audioRef.current.pause();
@@ -144,10 +142,6 @@ function App() {
         return () => {
           clearTimeout(celebrationTimeout.current);
           clearTimeout(stopTimeout);
-          if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-          }
         };
       }
       return () => clearTimeout(celebrationTimeout.current);
